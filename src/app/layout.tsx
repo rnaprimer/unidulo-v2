@@ -3,7 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://unidulo.com"),
+  metadataBase: new URL("https://www.unidulo.com"),
   title: { default: "Unidulo: custom packaging, made to your spec", template: "%s | Unidulo" },
   description:
     "Tell us the packaging you need. Unidulo finds a manufacturer in India that fits your size, material and quantity, and manages the order with you.",

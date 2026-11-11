@@ -100,6 +100,15 @@ export async function saveSubmission(
     return fail("We couldn't confirm you're a person. Complete the check and try again.");
   }
 
+  // A retry of a request we already saved gets its reference back straight
+  // away, before the rate limit, so it is never mistaken for a new request.
+  const saved = await db
+    .from(table)
+    .select("reference")
+    .eq("submission_id", meta.submissionId)
+    .maybeSingle();
+  if (saved.data) return { ok: true, reference: saved.data.reference };
+
   const ipHash = hashIp(ip);
   const hourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
   const recent = await db
