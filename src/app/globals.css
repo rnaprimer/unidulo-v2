@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+
+/* Colours come from a packaging drawing: board, ink, the brown of kraft
+   paper, and the blue that marks a fold line on a dieline. */
+@theme {
+  --color-paper: #f4f6f5;
+  --color-surface: #ffffff;
+  --color-ink: #14262b;
+  --color-muted: #55676b;
+  --color-line: #c9d2d0;
+  --color-kraft: #b58b5a;
+  --color-kraft-soft: #ead9c3;
+  --color-fold: #2456e6;
+  --color-fold-dark: #1a3fb0;
+  --color-error: #b3261e;
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Headlines use the wide cut of the typeface, like lettering on a carton. */
+.display {
+  font-stretch: 118%;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-fold);
+  outline-offset: 2px;
+}
+
+/* The one piece of motion on the site: the box outline draws itself once. */
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.6s ease-out 0.2s forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
