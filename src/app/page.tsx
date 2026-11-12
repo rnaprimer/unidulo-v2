@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Capabilities } from "@/components/capabilities";
 import { Dieline } from "@/components/dieline";
 import { PACKAGING_TYPES } from "@/lib/schemas";
 
@@ -92,6 +93,8 @@ export default function Home() {
           </ul>
         </div>
       </section>
+
+      <Capabilities />
 
       <section className="bg-ink text-white">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-5 py-12">
