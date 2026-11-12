@@ -24,7 +24,7 @@ export default function Home() {
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 md:grid-cols-[5fr_6fr] md:py-20">
         <div>
           <h1 className="display text-4xl sm:text-5xl">
-            Custom packaging, made to your spec.
+            Custom manufacturing, made to your spec.
           </h1>
           <p className="mt-5 max-w-[46ch] text-lg text-muted">
             Tell us the size, material and quantity. Unidulo finds a manufacturer in India that
