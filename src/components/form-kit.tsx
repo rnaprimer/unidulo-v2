@@ -1,7 +1,7 @@
 "use client";
 
 // Small building blocks shared by the quote form and the manufacturer form.
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 export const inputClass =
   "mt-1.5 block w-full rounded-sm border border-line bg-surface px-3 py-2.5 text-base text-ink placeholder:text-muted/70 aria-[invalid=true]:border-error";
@@ -105,10 +105,33 @@ type TurnstileApi = {
   remove: (id: string) => void;
 };
 
-/** Cloudflare's "are you a person" check. Renders nothing if no site key is set. */
+const TURNSTILE_SCRIPT = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+// How long to wait for Cloudflare's script before saying it couldn't load.
+const TURNSTILE_LOAD_TIMEOUT_MS = 10_000;
+
+// What the person is told in each state of the check. The Send button is
+// disabled in every state except "done", so each of the others explains why.
+const turnstileMessages = {
+  loading: "Loading the security check…",
+  interactive: "Tick the box above to confirm you're a person. Then you can send.",
+  done: "",
+  expired: "The security check timed out. Run it again to send.",
+  failed: "The security check didn't work.",
+  unavailable: "The security check couldn't load. An ad blocker or a weak connection can cause this.",
+};
+type TurnstileStatus = keyof typeof turnstileMessages;
+
+/**
+ * Cloudflare's "are you a person" check. Renders nothing if no site key is set.
+ * This only decides what the browser shows; the server still verifies the token.
+ */
 export function Turnstile({ onToken }: { onToken: (token: string) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+  const [status, setStatus] = useState<TurnstileStatus>("loading");
+  // Counts retries. Changing it re-runs the effect below, which starts the check afresh.
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     if (!siteKey) return;
@@ -116,34 +139,98 @@ export function Turnstile({ onToken }: { onToken: (token: string) => void }) {
     let widgetId: string | undefined;
     let cancelled = false;
 
+    // Every state except "done" means there is no usable token.
+    const update = (next: TurnstileStatus, token = "") => {
+      if (cancelled) return;
+      setStatus(next);
+      onToken(token);
+    };
+
     const render = () => {
       const turnstile = api();
       if (cancelled || !ref.current || !turnstile) return;
       widgetId = turnstile.render(ref.current, {
         sitekey: siteKey,
-        callback: onToken,
-        "expired-callback": () => onToken(""),
-        "error-callback": () => onToken(""),
+        callback: (token: string) => update("done", token),
+        "before-interactive-callback": () => update("interactive"),
+        "expired-callback": () => update("expired"),
+        "timeout-callback": () => update("expired"),
+        "error-callback": () => {
+          update("failed");
+          return true; // tells Turnstile we've shown our own message
+        },
       });
+    };
+
+    let script: HTMLScriptElement | null = null;
+    let timer: number | undefined;
+    const scriptFailed = () => {
+      script?.remove(); // so a retry downloads it again
+      update("unavailable");
     };
 
     if (api()) {
       render();
     } else {
-      const script = document.createElement("script");
-      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-      script.async = true;
-      script.onload = render;
-      document.head.appendChild(script);
+      script = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SCRIPT}"]`);
+      if (!script) {
+        script = document.createElement("script");
+        script.src = TURNSTILE_SCRIPT;
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", render);
+      script.addEventListener("error", scriptFailed);
+      timer = window.setTimeout(() => {
+        if (!api()) update("unavailable");
+      }, TURNSTILE_LOAD_TIMEOUT_MS);
     }
+
     return () => {
       cancelled = true;
+      window.clearTimeout(timer);
+      script?.removeEventListener("load", render);
+      script?.removeEventListener("error", scriptFailed);
       if (widgetId) api()?.remove(widgetId);
     };
-  }, [siteKey, onToken]);
+  }, [siteKey, onToken, attempt]);
 
   if (!siteKey) return null;
-  return <div ref={ref} className="min-h-[65px]" />;
+
+  const retry = () => {
+    setStatus("loading");
+    onToken("");
+    setAttempt((n) => n + 1);
+  };
+  const problem = status === "expired" || status === "failed" || status === "unavailable";
+  const message = turnstileMessages[status];
+
+  return (
+    <div>
+      <div ref={ref} className="min-h-[65px]" />
+      <div role="status" className="mt-2 space-y-1 text-sm text-muted">
+        {message && <p className={problem ? "font-medium text-error" : undefined}>{message}</p>}
+        {contactEmail && (status === "failed" || status === "unavailable") && (
+          <p>
+            If it keeps happening, email us at{" "}
+            <a href={`mailto:${contactEmail}`} className="text-fold underline underline-offset-4">
+              {contactEmail}
+            </a>
+            .
+          </p>
+        )}
+      </div>
+      {problem && (
+        <button
+          type="button"
+          onClick={retry}
+          className="mt-2 text-sm font-medium text-fold underline underline-offset-4"
+        >
+          Try the check again
+        </button>
+      )}
+    </div>
+  );
 }
 
 export function SubmitError({ message }: { message: string }) {
