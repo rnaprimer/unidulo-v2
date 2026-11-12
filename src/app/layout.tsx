@@ -27,13 +27,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <header className="border-b border-line bg-surface">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-3 px-5 py-4">
+          {/* On phones: name and quote button on one line, the links on a line below.
+              From tablet width up: everything on one line. */}
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-5 py-4">
             <Link href="/" className="display text-xl">
               Unidulo
             </Link>
-            <nav aria-label="Main" className="flex flex-1 flex-wrap gap-x-6 gap-y-2 text-[15px]">
+            <nav
+              aria-label="Main"
+              className="order-3 flex w-full flex-wrap justify-between gap-x-2.5 gap-y-2 border-t border-line pt-3 text-[13px] sm:justify-start sm:gap-x-6 sm:text-sm md:order-none md:w-auto md:flex-1 md:border-0 md:pt-0 md:text-[15px]"
+            >
               {nav.map((item) => (
-                <Link key={item.href} href={item.href} className="text-muted hover:text-ink">
+                <Link key={item.href} href={item.href} className="py-1 text-muted hover:text-ink">
                   {item.label}
                 </Link>
               ))}
