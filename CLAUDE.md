@@ -12,12 +12,18 @@ The owner is a solo founder who is not writing the code but wants to understand 
 2. Packaging RFQ form: multi-step, text only, no file uploads.
 3. Manufacturer interest form.
 4. Email alert to the owner for every submission.
+5. Owner-only operations console at `/ops`: sign-in for one Supabase Auth user
+   created by hand, a list and detail view of RFQs and manufacturer
+   applications, status changes, private notes, one next action with a due
+   date per record, and a button to resend a missed alert email.
 
 ## Out of scope until the owner asks
 
-File or artwork uploads, user accounts and login, customer or manufacturer
-portals, operator dashboard, supplier matching, quotations, orders, payments,
-production tracking, analytics, AI features, background queues, Redis.
+File or artwork uploads, user accounts and login (the single owner sign-in for
+`/ops` is the only exception: no sign-up, invitations, roles or MFA), customer
+or manufacturer portals, team roles or ownership assignment, supplier matching
+or a supplier directory, quotations, orders, payments, production tracking,
+analytics, AI features, background queues or workers, an email outbox, Redis.
 Do not add scaffolding, tables, or placeholder pages for any of these.
 
 ## Stack
@@ -51,10 +57,16 @@ Do not add other dependencies without asking first.
   or production statuses.
 - Secrets live in `.env.local` and Vercel environment variables. Never commit them.
   Keep `.env.example` up to date.
+- Every `/ops` page and every `/ops` server action checks on the server that the
+  signed-in user is the owner (`OWNER_USER_ID`). Hiding a link is not a check.
+- Notes written in the console are private: never shown on the public site and
+  never included in an email.
 
 ## Data model for v1
 
-Two tables only: `rfqs` and `manufacturer_applications`.
+Three tables only: `rfqs`, `manufacturer_applications`, and `notes` (console
+notes, each linked to exactly one RFQ or one manufacturer application).
+Both record tables also carry `next_action`, `next_action_due` and `updated_at`.
 
 RFQ fields: packaging type, intended use, length, width, height, unit, material,
 print colours, finishing, quantity, delivery city and state, required-by date,

@@ -4,6 +4,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 import { headers } from "next/headers";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { KINDS, alertEmail, alertText, type Kind, type ManufacturerRow, type RfqRow } from "@/lib/records";
 import type { SubmitResult } from "@/lib/schemas";
 
 const MAX_PER_HOUR = 5;
@@ -16,11 +17,10 @@ export type SubmitMeta = {
   website: string;
 };
 
-type Table = "rfqs" | "manufacturer_applications";
-
 const fail = (message: string): SubmitResult => ({ ok: false, message });
 
-function database(): SupabaseClient | null {
+/** The server's own connection to the database. Returns null if it isn't configured. */
+export function database(): SupabaseClient | null {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return null;
@@ -55,15 +55,11 @@ async function passesTurnstile(token: string, ip: string): Promise<boolean> {
   }
 }
 
-async function sendAlert(subject: string, lines: [string, unknown][]): Promise<boolean> {
+async function sendAlert(subject: string, text: string): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.OWNER_EMAIL;
   const from = process.env.EMAIL_FROM;
   if (!key || !to || !from) return false;
-  const text = lines
-    .filter(([, value]) => value !== "" && value != null)
-    .map(([label, value]) => `${label}: ${Array.isArray(value) ? value.join(", ") : value}`)
-    .join("\n");
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -73,15 +69,43 @@ async function sendAlert(subject: string, lines: [string, unknown][]): Promise<b
 }
 
 /**
+ * Emails the owner about one saved record and, if the email went out, stamps
+ * `notified_at` on the row. Returns whether it was sent. Never throws: a failed
+ * email leaves `notified_at` empty so it can be resent from the console.
+ */
+export async function notifyOwner(
+  db: SupabaseClient,
+  kind: Kind,
+  row: RfqRow | ManufacturerRow,
+): Promise<boolean> {
+  try {
+    const { subject, lines } = alertEmail(kind, row);
+    if (!(await sendAlert(subject, alertText(lines)))) {
+      console.error(`Alert email not sent for ${row.reference}`);
+      return false;
+    }
+    const stamped = await db
+      .from(KINDS[kind].table)
+      .update({ notified_at: new Date().toISOString() })
+      .eq("id", row.id);
+    if (stamped.error) console.error(`Alert sent for ${row.reference} but notified_at not saved`);
+    return true;
+  } catch (error) {
+    console.error(`Alert email failed for ${row.reference}`, error);
+    return false;
+  }
+}
+
+/**
  * Saves one submission and returns its reference number.
  * `row` must already be validated; this function handles everything else.
  */
 export async function saveSubmission(
-  table: Table,
+  kind: Kind,
   meta: SubmitMeta,
   row: Record<string, unknown>,
-  email: { subject: (reference: string) => string; lines: [string, unknown][] },
 ): Promise<SubmitResult> {
+  const table = KINDS[kind].table;
   // A filled honeypot means a bot. Say nothing useful and save nothing.
   if (meta.website) return fail("We couldn't send your request. Please try again.");
 
@@ -127,7 +151,7 @@ export async function saveSubmission(
   const insert = await db
     .from(table)
     .insert({ ...row, submission_id: meta.submissionId, ip_hash: ipHash })
-    .select("id, reference")
+    .select("*")
     .single();
 
   if (insert.error) {
@@ -145,20 +169,9 @@ export async function saveSubmission(
     return fail("We couldn't save your request. Please try again in a minute.");
   }
 
-  const { id, reference } = insert.data;
-
   // The request is saved. Email is a courtesy on top: if it fails, the
   // customer still sees success and `notified_at` stays empty for a resend.
-  try {
-    const sent = await sendAlert(email.subject(reference), [["Reference", reference], ...email.lines]);
-    if (sent) {
-      await db.from(table).update({ notified_at: new Date().toISOString() }).eq("id", id);
-    } else {
-      console.error(`Alert email not sent for ${reference}`);
-    }
-  } catch (error) {
-    console.error(`Alert email failed for ${reference}`, error);
-  }
+  await notifyOwner(db, kind, insert.data);
 
-  return { ok: true, reference };
+  return { ok: true, reference: insert.data.reference };
 }

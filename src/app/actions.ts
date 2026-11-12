@@ -2,16 +2,7 @@
 
 // Server Actions: functions the browser can call, but which run on the server.
 // Anyone can call them directly, so nothing from the browser is trusted here.
-import {
-  FINISHES,
-  MATERIALS,
-  PACKAGING_TYPES,
-  PRINT_COLOURS,
-  fieldErrors,
-  manufacturerSchema,
-  rfqSchema,
-  type SubmitResult,
-} from "@/lib/schemas";
+import { fieldErrors, manufacturerSchema, rfqSchema, type SubmitResult } from "@/lib/schemas";
 import { saveSubmission, type SubmitMeta } from "@/lib/server/submit";
 
 const invalid = (errors: Record<string, string>): SubmitResult => ({
@@ -26,7 +17,7 @@ export async function submitRfq(input: unknown, meta: SubmitMeta): Promise<Submi
   const d = parsed.data;
 
   return saveSubmission(
-    "rfqs",
+    "rfq",
     meta,
     {
       packaging_type: d.packagingType,
@@ -49,25 +40,6 @@ export async function submitRfq(input: unknown, meta: SubmitMeta): Promise<Submi
       email: d.email,
       phone: d.phone,
     },
-    {
-      subject: (ref) => `New RFQ ${ref}: ${d.quantity} x ${PACKAGING_TYPES[d.packagingType]}`,
-      lines: [
-        ["Packaging", PACKAGING_TYPES[d.packagingType]],
-        ["For", d.intendedUse],
-        ["Size", `${d.length} x ${d.width} x ${d.height} ${d.unit} (${d.dimensionBasis})`],
-        ["Material", MATERIALS[d.material]],
-        ["Printing", PRINT_COLOURS[d.printColours]],
-        ["Finishing", d.finishing.map((f) => FINISHES[f])],
-        ["Quantity", d.quantity],
-        ["Deliver to", `${d.deliveryCity}, ${d.deliveryState}`],
-        ["Required by", d.requiredBy],
-        ["Notes", d.notes],
-        ["Name", d.contactName],
-        ["Company", d.company],
-        ["Email", d.email],
-        ["Phone", d.phone],
-      ],
-    },
   );
 }
 
@@ -80,7 +52,7 @@ export async function submitManufacturerApplication(
   const d = parsed.data;
 
   return saveSubmission(
-    "manufacturer_applications",
+    "manufacturer",
     meta,
     {
       company_name: d.companyName,
@@ -92,19 +64,6 @@ export async function submitManufacturerApplication(
       products: d.products,
       minimum_order: d.minimumOrder,
       capabilities: d.capabilities,
-    },
-    {
-      subject: (ref) => `New manufacturer application ${ref}: ${d.companyName}`,
-      lines: [
-        ["Company", d.companyName],
-        ["Contact", d.contactName],
-        ["Email", d.email],
-        ["Phone", d.phone],
-        ["Location", `${d.city}, ${d.state}`],
-        ["Makes", d.products.map((p) => PACKAGING_TYPES[p])],
-        ["Minimum order", d.minimumOrder],
-        ["Capabilities", d.capabilities],
-      ],
     },
   );
 }
