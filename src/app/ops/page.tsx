@@ -77,7 +77,7 @@ async function List({ searchParams }: Pick<PageProps<"/ops">, "searchParams">) {
               ? `No ${KINDS[kind].label.toLowerCase()} with the status “${status}”.`
               : `No ${KINDS[kind].label.toLowerCase()} yet. New ones appear here as soon as a form is sent.`}{" "}
           {(page > 1 || status) && (
-            <Link href={href(kind, null)} className="text-fold underline underline-offset-4">
+            <Link href={href(kind, null)} className="text-action underline underline-offset-4">
               Show all
             </Link>
           )}
@@ -117,7 +117,7 @@ async function List({ searchParams }: Pick<PageProps<"/ops">, "searchParams">) {
           {pages > 1 && (
             <nav aria-label="Pages" className="mt-4 flex items-center gap-4 text-sm">
               {page > 1 ? (
-                <Link href={href(kind, status, page - 1)} className="text-fold underline underline-offset-4">
+                <Link href={href(kind, status, page - 1)} className="text-action underline underline-offset-4">
                   Newer
                 </Link>
               ) : (
@@ -127,7 +127,7 @@ async function List({ searchParams }: Pick<PageProps<"/ops">, "searchParams">) {
                 Page {page} of {pages}
               </span>
               {page < pages ? (
-                <Link href={href(kind, status, page + 1)} className="text-fold underline underline-offset-4">
+                <Link href={href(kind, status, page + 1)} className="text-action underline underline-offset-4">
                   Older
                 </Link>
               ) : (
@@ -147,7 +147,7 @@ function Row({ kind, row }: { kind: Kind; row: ListRow }) {
   return (
     <tr className={`border-b border-line last:border-b-0 ${overdue ? "bg-error/5" : ""}`}>
       <td className={`${cell} whitespace-nowrap`}>
-        <Link href={`/ops/${kind}/${row.id}`} className="font-medium text-fold underline underline-offset-4">
+        <Link href={`/ops/${kind}/${row.id}`} className="font-medium text-action underline underline-offset-4">
           {row.reference}
         </Link>
         {!row.notified_at && <div className="mt-1 text-xs font-medium text-error">Alert not sent</div>}

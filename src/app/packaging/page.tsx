@@ -90,7 +90,7 @@ export default function Packaging() {
 
         <Link
           href="/quote"
-          className="mt-10 inline-block rounded-sm bg-fold px-5 py-3 font-medium text-white hover:bg-fold-dark"
+          className="mt-10 inline-block rounded-sm bg-action px-5 py-3 font-medium text-white hover:bg-action-hover"
         >
           Request a quote
         </Link>

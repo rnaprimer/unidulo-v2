@@ -88,7 +88,7 @@ function Icon({ children, size = 28 }: { children: React.ReactNode; size?: numbe
 /** The label on everything that cannot be ordered yet. Always words, never colour alone. */
 function ComingSoon() {
   return (
-    <span className="inline-block rounded-full border border-kraft px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-ink">
+    <span className="inline-block rounded-full border border-ink px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-ink">
       Coming soon
     </span>
   );
@@ -107,13 +107,13 @@ export function Capabilities() {
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {/* Packaging: the one thing that is live. Two columns wide on desktop. */}
           <li className="sm:col-span-2 lg:col-span-3">
-            <div className="rounded-sm border border-t-[3px] border-line border-t-kraft bg-surface p-6 lg:w-[calc((200%_-_1.25rem)/3)]">
+            <div className="rounded-sm border border-t-[3px] border-line border-t-lime bg-surface p-6 lg:w-[calc((200%_-_1.25rem)/3)]">
               <div className="flex items-start justify-between gap-4">
                 <Icon size={40}>
                   <path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z" />
                   <path d="M3 7.5 12 12l9-4.5M12 12v9" />
                 </Icon>
-                <span className="inline-block rounded-full bg-fold px-2.5 py-1 text-xs font-semibold whitespace-nowrap text-white">
+                <span className="inline-block rounded-full bg-lime px-2.5 py-1 text-xs font-semibold whitespace-nowrap text-ink">
                   Available now
                 </span>
               </div>
@@ -124,7 +124,7 @@ export function Capabilities() {
               </p>
               <Link
                 href="/quote"
-                className="mt-5 inline-block rounded-sm bg-fold px-5 py-3 font-medium text-white hover:bg-fold-dark"
+                className="mt-5 inline-block rounded-sm bg-action px-5 py-3 font-medium text-white hover:bg-action-hover"
               >
                 Request a quote
               </Link>

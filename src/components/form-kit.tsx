@@ -66,7 +66,7 @@ export function CheckboxGroup<K extends string>({
           <label key={key} className="flex items-center gap-2.5">
             <input
               type="checkbox"
-              className="size-4 accent-fold"
+              className="size-4 accent-action"
               checked={selected.includes(key)}
               onChange={(e) =>
                 onChange(e.target.checked ? [...selected, key] : selected.filter((k) => k !== key))
@@ -213,7 +213,7 @@ export function Turnstile({ onToken }: { onToken: (token: string) => void }) {
         {contactEmail && (status === "failed" || status === "unavailable") && (
           <p>
             If it keeps happening, email us at{" "}
-            <a href={`mailto:${contactEmail}`} className="text-fold underline underline-offset-4">
+            <a href={`mailto:${contactEmail}`} className="text-action underline underline-offset-4">
               {contactEmail}
             </a>
             .
@@ -224,7 +224,7 @@ export function Turnstile({ onToken }: { onToken: (token: string) => void }) {
         <button
           type="button"
           onClick={retry}
-          className="mt-2 text-sm font-medium text-fold underline underline-offset-4"
+          className="mt-2 text-sm font-medium text-action underline underline-offset-4"
         >
           Try the check again
         </button>
@@ -254,13 +254,13 @@ export function Received({
     <div role="status" className="rounded-sm border border-line bg-surface p-6 sm:p-8">
       <h2 className="display text-2xl">{title}</h2>
       <p className="mt-4 text-muted">Your reference number</p>
-      <p className="display mt-1 text-3xl text-fold">{reference}</p>
+      <p className="display mt-1 text-3xl text-action">{reference}</p>
       <div className="mt-5 max-w-[60ch] space-y-3 text-muted">{children}</div>
     </div>
   );
 }
 
 export const primaryButton =
-  "rounded-sm bg-fold px-5 py-3 font-medium text-white hover:bg-fold-dark disabled:cursor-not-allowed disabled:opacity-60";
+  "rounded-sm bg-action px-5 py-3 font-medium text-white hover:bg-action-hover disabled:cursor-not-allowed disabled:opacity-60";
 export const secondaryButton =
   "rounded-sm border border-ink px-5 py-3 font-medium hover:bg-surface disabled:opacity-60";

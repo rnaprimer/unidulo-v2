@@ -1,18 +1,19 @@
 @import "tailwindcss";
 @import "@fontsource-variable/archivo/wdth.css";
 
-/* Colours come from a packaging drawing: board, ink, the brown of kraft
-   paper, and the blue that marks a fold line on a dieline. */
+/* Colours come from the logo: its black lettering and its lime mark.
+   Lime is too pale to read on white, so it is only ever a fill with black on
+   top of it, or a colour on black. Text, links and buttons are black. */
 @theme {
-  --color-paper: #f4f6f5;
+  --color-paper: #f6f6f3;
   --color-surface: #ffffff;
-  --color-ink: #14262b;
-  --color-muted: #55676b;
-  --color-line: #c9d2d0;
-  --color-kraft: #b58b5a;
-  --color-kraft-soft: #ead9c3;
-  --color-fold: #2456e6;
-  --color-fold-dark: #1a3fb0;
+  --color-ink: #111111;
+  --color-muted: #5b5b57;
+  --color-line: #d6d6d0;
+  --color-lime: #dbfb3d;
+  --color-lime-soft: #f0fdb0;
+  --color-action: #111111;
+  --color-action-hover: #33332f;
   --color-error: #b3261e;
   --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
 }
@@ -32,8 +33,12 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-fold);
+  outline: 2px solid var(--color-action);
   outline-offset: 2px;
+}
+/* On the black band a black outline would vanish, so it turns lime there. */
+.bg-ink :focus-visible {
+  outline-color: var(--color-lime);
 }
 
 /* Motion on the site, part one: the box outline draws itself once. */

@@ -112,6 +112,11 @@ Name is Unidulo (never the old name Monobloc). Look: professional, minimal,
 industrial but approachable. Copy: plain language, no jargon, and no claims
 about capabilities that are not live. Low MOQ is one benefit, not the headline.
 
+Logo and colours: the header shows the logo image (`public/logo.png`), with the
+name kept as text in sentences, titles and emails. The palette is the logo's
+black and lime. Lime is only a fill with black on it, or a colour on black;
+never text or a thin line on a light background.
+
 Future capabilities, industries and planned features (such as order tracking)
 may be shown on the site only when each one is visibly labelled "Coming soon"
 in words, and nothing implies readiness, experience, customers, certification

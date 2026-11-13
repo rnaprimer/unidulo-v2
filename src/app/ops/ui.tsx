@@ -4,7 +4,7 @@
 import { useFormStatus } from "react-dom";
 
 export const opsButton =
-  "rounded-sm bg-ink px-3 py-2 text-sm font-medium text-white hover:bg-fold-dark disabled:cursor-not-allowed disabled:opacity-60";
+  "rounded-sm bg-ink px-3 py-2 text-sm font-medium text-white hover:bg-action-hover disabled:cursor-not-allowed disabled:opacity-60";
 export const opsQuietButton =
   "rounded-sm border border-ink px-3 py-2 text-sm font-medium hover:bg-paper disabled:opacity-60";
 export const opsInput =

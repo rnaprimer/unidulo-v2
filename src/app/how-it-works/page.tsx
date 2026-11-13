@@ -49,7 +49,7 @@ export default function HowItWorks() {
         <ol className="max-w-3xl">
           {steps.map((step, i) => (
             <li key={step.title} className="grid grid-cols-[3rem_1fr] gap-x-4 border-b border-line py-6">
-              <span className="display text-3xl text-kraft" aria-hidden="true">
+              <span className="display flex size-10 items-center justify-center rounded-full bg-lime text-xl" aria-hidden="true">
                 {i + 1}
               </span>
               <div>
@@ -77,7 +77,7 @@ export default function HowItWorks() {
 
         <Link
           href="/quote"
-          className="mt-10 inline-block rounded-sm bg-fold px-5 py-3 font-medium text-white hover:bg-fold-dark"
+          className="mt-10 inline-block rounded-sm bg-action px-5 py-3 font-medium text-white hover:bg-action-hover"
         >
           Request a quote
         </Link>

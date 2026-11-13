@@ -17,8 +17,8 @@ type State = (typeof stages)[number]["state"];
 function Marker({ state }: { state: State }) {
   if (state === "done") {
     return (
-      <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-fold" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--color-surface)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-action" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--color-lime)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
           <path d="M5 12.5l4.5 4.5L19 7.5" />
         </svg>
       </span>
@@ -27,9 +27,9 @@ function Marker({ state }: { state: State }) {
   if (state === "current") {
     return (
       <span className="relative flex size-6 shrink-0 items-center justify-center" aria-hidden="true">
-        <span className="pulse absolute inset-0 rounded-full border-2 border-fold" />
-        <span className="flex size-6 items-center justify-center rounded-full border-2 border-fold bg-surface">
-          <span className="size-2.5 rounded-full bg-fold" />
+        <span className="pulse absolute inset-0 rounded-full border-2 border-action" />
+        <span className="flex size-6 items-center justify-center rounded-full border-2 border-action bg-surface">
+          <span className="size-2.5 rounded-full bg-action" />
         </span>
       </span>
     );
@@ -44,7 +44,7 @@ export function TrackingPreview() {
         <div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
             <h2 className="display text-3xl">Follow your order like a parcel</h2>
-            <span className="inline-block rounded-full border border-kraft px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-ink">
+            <span className="inline-block rounded-full border border-ink px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap text-ink">
               Coming soon
             </span>
           </div>
@@ -53,13 +53,13 @@ export function TrackingPreview() {
             sample approval to delivery, without calling anyone. This is planned; it isn&rsquo;t
             available yet.
           </p>
-          <p className="mt-6 max-w-[52ch] border-l-[3px] border-kraft pl-3 font-medium">
+          <p className="mt-6 max-w-[52ch] border-l-[3px] border-lime pl-3 font-medium">
             Today, we send you updates by email and phone at each stage.
           </p>
         </div>
 
         {/* The example panel. Plain content: an ordered list, nothing to click. */}
-        <div className="rounded-sm border border-t-[3px] border-line border-t-kraft bg-surface">
+        <div className="rounded-sm border border-t-[3px] border-line border-t-lime bg-surface">
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line px-5 py-4">
             <p className="text-xs font-semibold tracking-wide text-muted uppercase">Example order</p>
             <p className="font-semibold">500 mailer boxes</p>
@@ -74,7 +74,7 @@ export function TrackingPreview() {
                     <span
                       aria-hidden="true"
                       className={`absolute top-6 bottom-0 left-[11px] border-l-2 ${
-                        stage.state === "done" ? "border-fold" : "border-dashed border-line"
+                        stage.state === "done" ? "border-action" : "border-dashed border-line"
                       }`}
                     />
                   )}
@@ -83,7 +83,7 @@ export function TrackingPreview() {
                     {stage.state === "current" ? (
                       <>
                         <span className="font-bold">{stage.name}</span>
-                        <span className="block text-sm font-medium text-fold">Current stage</span>
+                        <span className="mt-1 inline-block rounded-full bg-lime px-2 text-sm font-medium text-ink">Current stage</span>
                       </>
                     ) : (
                       <>

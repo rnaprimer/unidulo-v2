@@ -20,7 +20,7 @@ export default function Contact() {
           <p className="mt-2 text-muted">
             Send your size, material and quantity. We&rsquo;ll reply by email or phone.
           </p>
-          <span className="mt-4 inline-block font-medium text-fold underline underline-offset-4">
+          <span className="mt-4 inline-block font-medium text-action underline underline-offset-4">
             Request a quote
           </span>
         </Link>
@@ -30,7 +30,7 @@ export default function Contact() {
             Tell us what you make and your minimums, and we&rsquo;ll be in touch about suitable
             enquiries.
           </p>
-          <span className="mt-4 inline-block font-medium text-fold underline underline-offset-4">
+          <span className="mt-4 inline-block font-medium text-action underline underline-offset-4">
             Apply as a manufacturer
           </span>
         </Link>
@@ -39,7 +39,7 @@ export default function Contact() {
           {email && (
             <p className="mt-1">
               For anything else, email{" "}
-              <a href={`mailto:${email}`} className="text-fold underline underline-offset-4">
+              <a href={`mailto:${email}`} className="text-action underline underline-offset-4">
                 {email}
               </a>
               .

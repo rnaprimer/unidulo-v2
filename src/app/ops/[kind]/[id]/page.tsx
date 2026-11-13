@@ -63,7 +63,7 @@ async function Detail({ params, searchParams }: PageProps<"/ops/[kind]/[id]">) {
     <>
       <OpsHeader />
       <p className="text-sm">
-        <Link href={kind === "rfq" ? "/ops" : "/ops?tab=manufacturer"} className="text-fold underline underline-offset-4">
+        <Link href={kind === "rfq" ? "/ops" : "/ops?tab=manufacturer"} className="text-action underline underline-offset-4">
           ← {KINDS[kind].label}
         </Link>
       </p>
@@ -211,8 +211,8 @@ async function Detail({ params, searchParams }: PageProps<"/ops/[kind]/[id]">) {
 /** Every field the person filled in, in the order the form asked for them. */
 function submission(kind: Kind, row: RfqRow | ManufacturerRow): [string, React.ReactNode][] {
   const contact: [string, React.ReactNode][] = [
-    ["Email", <a key="e" href={`mailto:${row.email}`} className="text-fold underline underline-offset-4">{row.email}</a>],
-    ["Phone", <a key="p" href={`tel:${row.phone}`} className="text-fold underline underline-offset-4">{row.phone}</a>],
+    ["Email", <a key="e" href={`mailto:${row.email}`} className="text-action underline underline-offset-4">{row.email}</a>],
+    ["Phone", <a key="p" href={`tel:${row.phone}`} className="text-action underline underline-offset-4">{row.phone}</a>],
   ];
   if (kind === "rfq") {
     const r = row as RfqRow;

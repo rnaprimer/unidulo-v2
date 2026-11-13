@@ -34,7 +34,7 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/quote"
-              className="rounded-sm bg-fold px-5 py-3 font-medium text-white hover:bg-fold-dark"
+              className="rounded-sm bg-action px-5 py-3 font-medium text-white hover:bg-action-hover"
             >
               Request a quote
             </Link>
@@ -81,7 +81,7 @@ export default function Home() {
               We&rsquo;re starting with paper and board packaging. If yours isn&rsquo;t listed,
               describe it in the request and we&rsquo;ll tell you whether we can help.
             </p>
-            <Link href="/packaging" className="mt-5 inline-block font-medium text-fold underline underline-offset-4">
+            <Link href="/packaging" className="mt-5 inline-block font-medium text-action underline underline-offset-4">
               Packaging types and what to specify
             </Link>
           </div>
@@ -110,7 +110,7 @@ export default function Home() {
           </div>
           <Link
             href="/quote"
-            className="rounded-sm bg-white px-5 py-3 font-medium text-ink hover:bg-paper"
+            className="rounded-sm bg-lime px-5 py-3 font-medium text-ink hover:bg-white"
           >
             Request a quote
           </Link>

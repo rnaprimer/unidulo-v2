@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 
@@ -27,11 +28,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <header className="border-b border-line bg-surface">
-          {/* On phones: name and quote button on one line, the links on a line below.
+          {/* On phones: logo and quote button on one line, the links on a line below.
               From tablet width up: everything on one line. */}
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-5 py-4">
-            <Link href="/" className="display text-xl">
-              Unidulo
+            {/* The logo is a picture, so its alt text carries the name for screen readers. */}
+            <Link href="/" className="shrink-0">
+              <Image src="/logo.png" alt="Unidulo" width={535} height={144} priority className="h-8 w-auto sm:h-9" />
             </Link>
             <nav
               aria-label="Main"
@@ -45,7 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </nav>
             <Link
               href="/quote"
-              className="rounded-sm bg-fold px-4 py-2 text-[15px] font-medium text-white hover:bg-fold-dark"
+              className="rounded-sm bg-action px-4 py-2 text-[15px] font-medium text-white hover:bg-action-hover"
             >
               Request a quote
             </Link>

@@ -1,5 +1,5 @@
 // A dieline: the flat drawing a factory cuts and folds into a box.
-// Solid lines are cuts, dashed blue lines are folds.
+// Solid lines are cuts, dashed lines are folds.
 const PANELS = [
   { x: 40, w: 180, label: "Length" },
   { x: 220, w: 120, label: "Width" },
@@ -29,8 +29,8 @@ export function Dieline() {
       aria-label="Flat cutting drawing of a shipping box, with its length, width and height marked"
       className="h-auto w-full"
     >
-      <path d={outline} fill="var(--color-kraft-soft)" stroke="none" />
-      <g stroke="var(--color-fold)" strokeWidth="1.5" strokeDasharray="7 5" fill="none">
+      <path d={outline} fill="var(--color-lime-soft)" stroke="none" />
+      <g stroke="var(--color-action)" strokeWidth="1.5" strokeDasharray="7 5" fill="none">
         <line x1="40" y1={TOP} x2="640" y2={TOP} />
         <line x1="40" y1={bottom} x2="640" y2={bottom} />
         {[40, 220, 340, 520].map((x) => (
@@ -73,7 +73,7 @@ export function Dieline() {
       <g fontSize="13" fill="var(--color-muted)">
         <line x1="40" y1="312" x2="70" y2="312" stroke="var(--color-ink)" strokeWidth="2" />
         <text x="78" y="316">Cut</text>
-        <line x1="130" y1="312" x2="160" y2="312" stroke="var(--color-fold)" strokeWidth="1.5" strokeDasharray="7 5" />
+        <line x1="130" y1="312" x2="160" y2="312" stroke="var(--color-action)" strokeWidth="1.5" strokeDasharray="7 5" />
         <text x="168" y="316">Fold</text>
       </g>
     </svg>
