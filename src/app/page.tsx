@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Capabilities } from "@/components/capabilities";
 import { Dieline } from "@/components/dieline";
+import { TrackingPreview } from "@/components/tracking-preview";
 import { PACKAGING_TYPES } from "@/lib/schemas";
 
 const handled = [
@@ -69,6 +70,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TrackingPreview />
 
       <section className="mx-auto max-w-6xl px-5 py-14">
         <div className="grid gap-10 md:grid-cols-[2fr_3fr]">

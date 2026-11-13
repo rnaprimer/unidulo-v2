@@ -36,7 +36,7 @@ body {
   outline-offset: 2px;
 }
 
-/* The one piece of motion on the site: the box outline draws itself once. */
+/* Motion on the site, part one: the box outline draws itself once. */
 .draw {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
@@ -47,9 +47,31 @@ body {
     stroke-dashoffset: 0;
   }
 }
+
+/* Part two: a slow ring around the current stage in the order tracking preview. */
+.pulse {
+  animation: pulse 2.6s ease-out infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70%,
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Anyone who has asked their device for less motion gets none. */
 @media (prefers-reduced-motion: reduce) {
   .draw {
     animation: none;
     stroke-dashoffset: 0;
+  }
+  .pulse {
+    animation: none;
+    opacity: 0;
   }
 }

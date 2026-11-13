@@ -112,8 +112,10 @@ Name is Unidulo (never the old name Monobloc). Look: professional, minimal,
 industrial but approachable. Copy: plain language, no jargon, and no claims
 about capabilities that are not live. Low MOQ is one benefit, not the headline.
 
-Future capabilities and industries may be shown on the site only when each one
-is visibly labelled "Coming soon" in words, and nothing implies readiness,
-experience, customers, certification or a date. They are never links, never
-orderable, and never added to a form. Packaging is the only thing a visitor
-can order.
+Future capabilities, industries and planned features (such as order tracking)
+may be shown on the site only when each one is visibly labelled "Coming soon"
+in words, and nothing implies readiness, experience, customers, certification
+or a date. They are never links, never orderable, and never added to a form.
+Any illustration of a planned feature is labelled as an example in visible
+text, uses no real-format reference number, and says what happens today
+instead. Packaging is the only thing a visitor can order.
