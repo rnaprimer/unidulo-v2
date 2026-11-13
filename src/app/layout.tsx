@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-5 py-4">
             {/* The logo is a picture, so its alt text carries the name for screen readers. */}
             <Link href="/" className="shrink-0">
-              <Image src="/logo.png" alt="Unidulo" width={535} height={144} priority className="h-7 w-auto" />
+              <Image src="/logo.png" alt="Unidulo" width={614} height={144} priority className="h-7 w-auto" />
             </Link>
             <nav
               aria-label="Main"
