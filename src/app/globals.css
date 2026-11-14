@@ -67,6 +67,20 @@ body {
   outline-color: var(--color-lime);
 }
 
+/* The packaging switcher on the home page. Each panel is shown only while its
+   radio button is chosen. A browser too old to understand ":has" ignores these
+   rules and simply shows all five panels one under another. */
+.switcher:has(input:checked) .panel {
+  display: none;
+}
+.switcher:has(#pkg-0:checked) .panel-0,
+.switcher:has(#pkg-1:checked) .panel-1,
+.switcher:has(#pkg-2:checked) .panel-2,
+.switcher:has(#pkg-3:checked) .panel-3,
+.switcher:has(#pkg-4:checked) .panel-4 {
+  display: block;
+}
+
 /* Motion on the site, part one: the box outline draws itself once. */
 .draw {
   stroke-dasharray: 1;
