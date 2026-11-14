@@ -9,6 +9,7 @@
   --color-charcoal-hover: #3b4035;
   --color-soft: #5f6359; /* secondary text */
   --color-hair: #dcdfd3; /* hairline borders and dividers */
+  --color-edge: #8b8f84; /* the outline of a form field: darker than a hairline so it can be seen */
   --color-sage: #ebf0e0; /* "available" surfaces and badges */
   --color-lime: #dbfb3d;
   --color-lime-soft: #f0fdb0;

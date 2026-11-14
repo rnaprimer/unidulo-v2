@@ -4,7 +4,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 export const inputClass =
-  "mt-1.5 block w-full rounded-sm border border-line bg-surface px-3 py-2.5 text-base text-ink placeholder:text-muted/70 aria-[invalid=true]:border-error";
+  "mt-2 block w-full rounded-[3px] border border-edge bg-white px-3.5 py-3 text-base text-charcoal placeholder:text-soft/70 aria-[invalid=true]:border-error";
 
 export function Field({
   label,
@@ -23,12 +23,12 @@ export function Field({
   const describedBy = [hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(" ");
   return (
     <div>
-      <label htmlFor={id} className="font-medium">
+      <label htmlFor={id} className="text-sm font-medium">
         {label}
-        {optional && <span className="font-normal text-muted"> (optional)</span>}
+        {optional && <span className="font-normal text-soft"> (optional)</span>}
       </label>
       {hint && (
-        <p id={`${id}-hint`} className="mt-0.5 text-sm text-muted">
+        <p id={`${id}-hint`} className="mt-0.5 text-sm text-soft">
           {hint}
         </p>
       )}
@@ -59,14 +59,14 @@ export function CheckboxGroup<K extends string>({
 }) {
   return (
     <fieldset>
-      <legend className="font-medium">{legend}</legend>
-      {hint && <p className="mt-0.5 text-sm text-muted">{hint}</p>}
+      <legend className="text-sm font-medium">{legend}</legend>
+      {hint && <p className="mt-0.5 text-sm text-soft">{hint}</p>}
       <div className="mt-2 grid gap-x-6 gap-y-2 sm:grid-cols-2">
         {(Object.entries(options) as [K, string][]).map(([key, label]) => (
           <label key={key} className="flex items-center gap-2.5">
             <input
               type="checkbox"
-              className="size-4 accent-action"
+              className="size-4 accent-charcoal"
               checked={selected.includes(key)}
               onChange={(e) =>
                 onChange(e.target.checked ? [...selected, key] : selected.filter((k) => k !== key))
@@ -208,12 +208,12 @@ export function Turnstile({ onToken }: { onToken: (token: string) => void }) {
   return (
     <div>
       <div ref={ref} className="min-h-[65px]" />
-      <div role="status" className="mt-2 space-y-1 text-sm text-muted">
+      <div role="status" className="mt-2 space-y-1 text-sm text-soft">
         {message && <p className={problem ? "font-medium text-error" : undefined}>{message}</p>}
         {contactEmail && (status === "failed" || status === "unavailable") && (
           <p>
             If it keeps happening, email us at{" "}
-            <a href={`mailto:${contactEmail}`} className="text-action underline underline-offset-4">
+            <a href={`mailto:${contactEmail}`} className="text-charcoal underline underline-offset-4">
               {contactEmail}
             </a>
             .
@@ -224,7 +224,7 @@ export function Turnstile({ onToken }: { onToken: (token: string) => void }) {
         <button
           type="button"
           onClick={retry}
-          className="mt-2 text-sm font-medium text-action underline underline-offset-4"
+          className="mt-2 text-sm font-medium text-charcoal underline underline-offset-4"
         >
           Try the check again
         </button>
@@ -235,7 +235,7 @@ export function Turnstile({ onToken }: { onToken: (token: string) => void }) {
 
 export function SubmitError({ message }: { message: string }) {
   return (
-    <p role="alert" className="rounded-sm border border-error bg-surface px-4 py-3 font-medium text-error">
+    <p role="alert" className="rounded-[3px] border border-error bg-white px-4 py-3 font-medium text-error">
       {message}
     </p>
   );
@@ -251,16 +251,16 @@ export function Received({
   children: React.ReactNode;
 }) {
   return (
-    <div role="status" className="rounded-sm border border-line bg-surface p-6 sm:p-8">
-      <h2 className="display text-2xl">{title}</h2>
-      <p className="mt-4 text-muted">Your reference number</p>
-      <p className="display mt-1 text-3xl text-action">{reference}</p>
-      <div className="mt-5 max-w-[60ch] space-y-3 text-muted">{children}</div>
+    <div role="status" className="rounded-[3px] bg-sage p-6 sm:p-8">
+      <h2 className="display text-3xl">{title}</h2>
+      <p className="label mt-6">Your reference number</p>
+      <p className="mt-2 text-3xl font-medium tracking-tight text-charcoal">{reference}</p>
+      <div className="mt-5 max-w-[60ch] space-y-3 text-soft">{children}</div>
     </div>
   );
 }
 
 export const primaryButton =
-  "rounded-sm bg-action px-5 py-3 font-medium text-white hover:bg-action-hover disabled:cursor-not-allowed disabled:opacity-60";
+  "rounded-[3px] bg-charcoal px-6 py-3 text-sm font-medium text-white hover:bg-charcoal-hover disabled:cursor-not-allowed disabled:opacity-60";
 export const secondaryButton =
-  "rounded-sm border border-ink px-5 py-3 font-medium hover:bg-surface disabled:opacity-60";
+  "rounded-[3px] border border-charcoal px-6 py-3 text-sm font-medium hover:bg-band disabled:opacity-60";

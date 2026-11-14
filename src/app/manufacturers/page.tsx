@@ -25,24 +25,26 @@ const points = [
 export default function Manufacturers() {
   return (
     <>
-      <PageIntro title="Make packaging? Work with Unidulo.">
+      <PageIntro label="For manufacturers" title="Make packaging? Work with Unidulo.">
         We&rsquo;re building a network of packaging units across India, starting in Odisha and
         eastern India. Tell us about your unit and we&rsquo;ll get in touch.
       </PageIntro>
-      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-12 md:grid-cols-[2fr_3fr]">
-        <div className="space-y-6">
+      <div className="mx-auto grid max-w-6xl items-start gap-12 px-5 py-12 md:grid-cols-[2fr_3fr] md:py-16">
+        <div className="border-b border-hair">
           {points.map((point) => (
-            <div key={point.title} className="border-t-2 border-ink pt-4">
-              <h2 className="text-lg font-semibold">{point.title}</h2>
-              <p className="mt-2 text-muted">{point.body}</p>
+            <div key={point.title} className="border-t border-hair py-6">
+              <h2 className="font-medium">{point.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-soft">{point.body}</p>
             </div>
           ))}
-          <p className="text-sm text-muted">
+          <p className="border-t border-hair py-6 text-sm text-soft">
             We are at an early stage and can&rsquo;t promise a volume of orders. Applying is
             free.
           </p>
         </div>
-        <ManufacturerForm />
+        <div className="rounded-[3px] border border-hair bg-white p-6 sm:p-10">
+          <ManufacturerForm />
+        </div>
       </div>
     </>
   );

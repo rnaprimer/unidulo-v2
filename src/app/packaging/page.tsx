@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/page-intro";
+import { Arrow, primaryButton } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Packaging",
@@ -51,48 +52,46 @@ const terms = [
 export default function Packaging() {
   return (
     <>
-      <PageIntro title="Packaging we quote">
+      <PageIntro label="Available today" title="Packaging we quote">
         Paper and board packaging, made to your size and printed with your branding. You
         don&rsquo;t need to know every detail. Tell us what you know and we&rsquo;ll ask about
         the rest.
       </PageIntro>
-      <div className="mx-auto max-w-6xl px-5 py-12">
+      <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] border-collapse text-left">
             <thead>
-              <tr className="border-b-2 border-ink text-sm text-muted">
-                <th className="py-3 pr-6 font-medium">Type</th>
-                <th className="py-3 pr-6 font-medium">Typically used for</th>
-                <th className="py-3 font-medium">Useful to tell us</th>
+              <tr className="border-b border-charcoal">
+                <th className="label py-3 pr-6">Type</th>
+                <th className="label py-3 pr-6">Typically used for</th>
+                <th className="label py-3">Useful to tell us</th>
               </tr>
             </thead>
             <tbody>
               {types.map((t) => (
-                <tr key={t.name} className="border-b border-line align-top">
-                  <th scope="row" className="py-4 pr-6 font-semibold">{t.name}</th>
-                  <td className="py-4 pr-6 text-muted">{t.use}</td>
-                  <td className="py-4 text-muted">{t.specify}</td>
+                <tr key={t.name} className="border-b border-hair align-top text-sm leading-relaxed">
+                  <th scope="row" className="py-5 pr-6 text-base font-medium">{t.name}</th>
+                  <td className="py-5 pr-6 text-soft">{t.use}</td>
+                  <td className="py-5 text-soft">{t.specify}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        <h2 className="display mt-14 text-2xl">Terms you&rsquo;ll see in the request form</h2>
-        <dl className="mt-5 max-w-3xl">
+        <h2 className="display mt-16 text-3xl">Terms you&rsquo;ll see in the request form</h2>
+        <dl className="mt-8 max-w-3xl border-t border-hair text-sm leading-relaxed">
           {terms.map(([term, meaning]) => (
-            <div key={term} className="grid gap-x-6 border-b border-line py-3 sm:grid-cols-[8rem_1fr]">
-              <dt className="font-semibold">{term}</dt>
-              <dd className="text-muted">{meaning}</dd>
+            <div key={term} className="grid gap-x-6 border-b border-hair py-4 sm:grid-cols-[8rem_1fr]">
+              <dt className="font-medium">{term}</dt>
+              <dd className="text-soft">{meaning}</dd>
             </div>
           ))}
         </dl>
 
-        <Link
-          href="/quote"
-          className="mt-10 inline-block rounded-sm bg-action px-5 py-3 font-medium text-white hover:bg-action-hover"
-        >
+        <Link href="/quote" className={`${primaryButton} mt-12`}>
           Request a quote
+          <Arrow />
         </Link>
       </div>
     </>

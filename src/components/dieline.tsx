@@ -30,7 +30,7 @@ export function Dieline() {
       className="h-auto w-full"
     >
       <path d={outline} fill="var(--color-lime-soft)" stroke="none" />
-      <g stroke="var(--color-action)" strokeWidth="1.5" strokeDasharray="7 5" fill="none">
+      <g stroke="var(--color-charcoal)" strokeWidth="1.5" strokeDasharray="7 5" fill="none">
         <line x1="40" y1={TOP} x2="640" y2={TOP} />
         <line x1="40" y1={bottom} x2="640" y2={bottom} />
         {[40, 220, 340, 520].map((x) => (
@@ -42,11 +42,11 @@ export function Dieline() {
         pathLength={1}
         className="draw"
         fill="none"
-        stroke="var(--color-ink)"
+        stroke="var(--color-charcoal)"
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      <g fill="var(--color-ink)" fontSize="15" fontWeight="500" textAnchor="middle">
+      <g fill="var(--color-charcoal)" fontSize="15" fontWeight="500" textAnchor="middle">
         {PANELS.filter((p) => p.label).map((p) => (
           <text key={p.label} x={p.x + p.w / 2} y={TOP + HEIGHT / 2 + 5}>
             {p.label}
@@ -64,16 +64,16 @@ export function Dieline() {
         y={TOP + HEIGHT / 2}
         fontSize="15"
         fontWeight="500"
-        fill="var(--color-ink)"
+        fill="var(--color-charcoal)"
         textAnchor="middle"
         transform={`rotate(90 682 ${TOP + HEIGHT / 2})`}
       >
         Height
       </text>
       <g fontSize="13" fill="var(--color-muted)">
-        <line x1="40" y1="312" x2="70" y2="312" stroke="var(--color-ink)" strokeWidth="2" />
+        <line x1="40" y1="312" x2="70" y2="312" stroke="var(--color-charcoal)" strokeWidth="2" />
         <text x="78" y="316">Cut</text>
-        <line x1="130" y1="312" x2="160" y2="312" stroke="var(--color-action)" strokeWidth="1.5" strokeDasharray="7 5" />
+        <line x1="130" y1="312" x2="160" y2="312" stroke="var(--color-charcoal)" strokeWidth="1.5" strokeDasharray="7 5" />
         <text x="168" y="316">Fold</text>
       </g>
     </svg>

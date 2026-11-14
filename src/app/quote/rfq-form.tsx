@@ -178,14 +178,14 @@ export function RfqForm() {
       }}
       className="relative"
     >
-      <p className="text-sm text-muted">
+      <p className="label">
         Step {step + 1} of {REVIEW + 1}
       </p>
-      <h2 ref={heading} tabIndex={-1} className="display mt-1 text-2xl outline-none">
+      <h2 ref={heading} tabIndex={-1} className="display mt-3 text-3xl outline-none">
         {step < REVIEW ? steps[step].title : "Check and send"}
       </h2>
 
-      <div className="mt-6 space-y-6">
+      <div className="mt-8 space-y-6">
         {step === 0 && (
           <>
             <Field label="Type of packaging" error={errors.packagingType}>
@@ -204,8 +204,8 @@ export function RfqForm() {
               {(p) => <input {...p} {...text("intendedUse")} type="text" maxLength={300} className={inputClass} />}
             </Field>
             <fieldset>
-              <legend className="font-medium">Size</legend>
-              <p className="mt-0.5 text-sm text-muted">Rough sizes are fine. We&rsquo;ll confirm them with you.</p>
+              <legend className="text-sm font-medium">Size</legend>
+              <p className="mt-0.5 text-sm text-soft">Rough sizes are fine. We&rsquo;ll confirm them with you.</p>
               <div className="mt-2 grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {(["length", "width", "height"] as const).map((dim) => (
                   <Field key={dim} label={dim[0].toUpperCase() + dim.slice(1)} error={errors[dim]}>
@@ -317,10 +317,10 @@ export function RfqForm() {
 
         {step === REVIEW && (
           <>
-            <dl className="border-t border-line">
+            <dl className="border-t border-hair">
               {summary.map(([label, value]) => (
-                <div key={label} className="grid gap-x-6 border-b border-line py-2.5 sm:grid-cols-[11rem_1fr]">
-                  <dt className="text-muted">{label}</dt>
+                <div key={label} className="grid gap-x-6 border-b border-hair py-2.5 sm:grid-cols-[11rem_1fr]">
+                  <dt className="text-soft">{label}</dt>
                   <dd className="break-words">{value}</dd>
                 </div>
               ))}
