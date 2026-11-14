@@ -82,19 +82,7 @@ body {
   display: block;
 }
 
-/* Motion on the site, part one: the box outline draws itself once. */
-.draw {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: draw 1.6s ease-out 0.2s forwards;
-}
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Part two: a slow ring around the current stage in the order tracking preview. */
+/* Motion on the site: a slow ring around the current stage in the order tracking preview. */
 .pulse {
   animation: pulse 2.6s ease-out infinite;
 }
@@ -114,10 +102,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .draw {
-    animation: none;
-    stroke-dashoffset: 0;
   }
   .pulse {
     animation: none;
