@@ -112,10 +112,16 @@ Name is Unidulo (never the old name Monobloc). Look: professional, minimal,
 industrial but approachable. Copy: plain language, no jargon, and no claims
 about capabilities that are not live. Low MOQ is one benefit, not the headline.
 
-Logo and colours: the header shows the logo image (`public/logo.png`), with the
-name kept as text in sentences, titles and emails. The palette is the logo's
-black and lime. Lime is only a fill with black on it, or a colour on black;
-never text or a thin line on a light background.
+Logo, colours and type: the header and footer show the logo image
+(`public/logo.png`), with the name kept as text in sentences, titles and
+emails. The public site's palette is defined as tokens in `src/app/globals.css`:
+warm off-white page, a grey-green band for alternate sections, charcoal for
+text, primary buttons and dark panels, pale sage for "available" surfaces, and
+the logo's lime. Lime is only a fill with dark text on it, or a colour on
+charcoal; never text or a thin line on a light background. The typeface is DM
+Sans, loaded with `next/font`. Headlines are large, regular weight and tight;
+sections carry a small tracked uppercase label. The console at `/ops` keeps its
+own older colour tokens and is not restyled with the public site.
 
 Future capabilities, industries and planned features (such as order tracking)
 may be shown on the site only when each one is visibly labelled "Coming soon"
@@ -124,3 +130,7 @@ or a date. They are never links, never orderable, and never added to a form.
 Any illustration of a planned feature is labelled as an example in visible
 text, uses no real-format reference number, and says what happens today
 instead. Packaging is the only thing a visitor can order.
+
+The home page's questions and process steps may only restate what the rest of
+the site already says. A photograph or drawing that shows something other than
+packaging is labelled as an illustration in visible text.

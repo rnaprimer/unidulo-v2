@@ -4,7 +4,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 export const inputClass =
-  "mt-2 block w-full rounded-[3px] border border-edge bg-white px-3.5 py-3 text-base text-charcoal placeholder:text-soft/70 aria-[invalid=true]:border-error";
+  "mt-2 block w-full rounded-[3px] border border-edge bg-white px-3.5 py-3 text-base text-charcoal placeholder:text-soft aria-[invalid=true]:border-error";
 
 export function Field({
   label,
