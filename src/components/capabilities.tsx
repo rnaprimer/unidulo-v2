@@ -96,7 +96,7 @@ function ComingSoon() {
 
 export function Capabilities() {
   return (
-    <section className="border-t border-line">
+    <section id="capabilities" className="scroll-mt-6 border-t border-line">
       <div className="mx-auto max-w-6xl px-5 py-14">
         <h2 className="display text-3xl">What Unidulo makes, and what&rsquo;s next</h2>
         <p className="mt-4 max-w-[62ch] text-muted">

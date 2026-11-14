@@ -1,43 +1,69 @@
 @import "tailwindcss";
-@import "@fontsource-variable/archivo/wdth.css";
+/* The public site's colours. The typeface is DM Sans, loaded in layout.tsx.
+   Lime comes from the logo. It is too pale to read on a light background, so
+   it is only ever a fill with dark text on top of it, or a colour on charcoal. */
+@theme {
+  --color-page: #f7f8f3; /* warm off-white page background */
+  --color-band: #eeefe7; /* slightly darker band for alternate sections */
+  --color-charcoal: #262a22; /* text, primary buttons, dark panels */
+  --color-charcoal-hover: #3b4035;
+  --color-soft: #5f6359; /* secondary text */
+  --color-hair: #dcdfd3; /* hairline borders and dividers */
+  --color-sage: #ebf0e0; /* "available" surfaces and badges */
+  --color-lime: #dbfb3d;
+  --color-lime-soft: #f0fdb0;
+  --color-error: #b3261e;
+}
 
-/* Colours come from the logo: its black lettering and its lime mark.
-   Lime is too pale to read on white, so it is only ever a fill with black on
-   top of it, or a colour on black. Text, links and buttons are black. */
+/* The owner's console at /ops still uses these older names and values.
+   The public pages are being moved off them one by one. */
 @theme {
   --color-paper: #f6f6f3;
   --color-surface: #ffffff;
   --color-ink: #111111;
   --color-muted: #5b5b57;
   --color-line: #d6d6d0;
-  --color-lime: #dbfb3d;
-  --color-lime-soft: #f0fdb0;
   --color-action: #111111;
   --color-action-hover: #33332f;
-  --color-error: #b3261e;
-  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-ink);
+  background: var(--color-page);
+  color: var(--color-charcoal);
   font-family: var(--font-sans);
 }
 
-/* Headlines use the wide cut of the typeface, like lettering on a carton. */
+/* Headlines: large, regular weight, set tight. */
 .display {
-  font-stretch: 118%;
-  font-weight: 650;
-  letter-spacing: -0.015em;
-  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+/* The small tracked capital letters above a section. */
+.label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-soft);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-action);
+  outline: 2px solid var(--color-charcoal);
   outline-offset: 2px;
 }
-/* On the black band a black outline would vanish, so it turns lime there. */
-.bg-ink :focus-visible {
+/* On a dark band a dark outline would vanish, so it turns lime there. */
+.bg-ink :focus-visible,
+.bg-charcoal :focus-visible {
   outline-color: var(--color-lime);
 }
 
@@ -71,6 +97,9 @@ body {
 
 /* Anyone who has asked their device for less motion gets none. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .draw {
     animation: none;
     stroke-dashoffset: 0;
