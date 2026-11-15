@@ -5,6 +5,7 @@
 @theme {
   --color-page: #f7f8f3; /* warm off-white page background */
   --color-band: #eeefe7; /* slightly darker band for alternate sections */
+  --color-header: #e2e4d9; /* the bar at the top: grey enough for the lime in the logo to stand out */
   --color-charcoal: #262a22; /* text, primary buttons, dark panels */
   --color-charcoal-hover: #3b4035;
   --color-soft: #5f6359; /* secondary text */

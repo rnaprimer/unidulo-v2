@@ -40,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <header className="border-b border-hair bg-page">
+        <header className="border-b border-hair bg-header">
           {/* On phones: logo and quote button on one line, the links on a line below.
               From tablet width up: everything on one line, links pushed to the right. */}
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-5 py-4 lg:gap-x-8">
