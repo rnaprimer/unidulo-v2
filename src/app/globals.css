@@ -5,7 +5,7 @@
 @theme {
   --color-page: #f7f8f3; /* warm off-white page background */
   --color-band: #eeefe7; /* slightly darker band for alternate sections */
-  --color-header: #e2e4d9; /* the bar at the top: grey enough for the lime in the logo to stand out */
+  --color-header: #272922; /* the dark bar at the top, so the lime in the logo stands out */
   --color-charcoal: #262a22; /* text, primary buttons, dark panels */
   --color-charcoal-hover: #3b4035;
   --color-soft: #5f6359; /* secondary text */
@@ -65,6 +65,7 @@ body {
 }
 /* On a dark band a dark outline would vanish, so it turns lime there. */
 .bg-ink :focus-visible,
+.bg-header :focus-visible,
 .bg-charcoal :focus-visible {
   outline-color: var(--color-lime);
 }

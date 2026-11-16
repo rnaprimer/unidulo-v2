@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { Arrow, primaryButton } from "@/components/ui";
+import { Arrow, limeButton } from "@/components/ui";
 import "./globals.css";
 
 // The site's typeface. Next.js downloads it when the site is built and serves
@@ -25,9 +25,11 @@ const nav = [
 
 const footerNav = [...nav, { href: "/contact", label: "Contact" }] as const;
 
-function Logo({ className }: { className: string }) {
+function Logo({ className, light = false }: { className: string; light?: boolean }) {
   // The logo is a picture, so its alt text carries the name for screen readers.
-  return <Image src="/logo.png" alt="Unidulo" width={614} height={144} priority className={className} />;
+  // The light version has white lettering, for the dark bar at the top.
+  const src = light ? "/logo-light.png" : "/logo.png";
+  return <Image src={src} alt="Unidulo" width={614} height={144} priority className={className} />;
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -40,24 +42,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <header className="border-b border-hair bg-header">
+        <header className="bg-header text-white">
           {/* On phones: logo and quote button on one line, the links on a line below.
               From tablet width up: everything on one line, links pushed to the right. */}
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-5 py-4 lg:gap-x-8">
             <Link href="/" className="shrink-0">
-              <Logo className="h-7 w-auto" />
+              <Logo light className="h-7 w-auto" />
             </Link>
             <nav
               aria-label="Main"
-              className="order-3 flex w-full flex-wrap justify-between gap-x-1 gap-y-2 border-t border-hair pt-3 text-xs min-[400px]:text-[13px] sm:justify-start sm:gap-x-7 md:order-none md:w-auto md:flex-1 md:flex-nowrap md:justify-end md:gap-x-4 md:border-0 md:pt-0 md:whitespace-nowrap lg:gap-x-7"
+              className="order-3 flex w-full flex-wrap justify-between gap-x-1 gap-y-2 border-t border-white/15 pt-3 text-xs min-[400px]:text-[13px] sm:justify-start sm:gap-x-7 md:order-none md:w-auto md:flex-1 md:flex-nowrap md:justify-end md:gap-x-4 md:border-0 md:pt-0 md:whitespace-nowrap lg:gap-x-7"
             >
               {nav.map((item) => (
-                <Link key={item.href} href={item.href} className="py-1 text-soft hover:text-charcoal">
+                <Link key={item.href} href={item.href} className="py-1 text-white/75 hover:text-white">
                   {item.label}
                 </Link>
               ))}
             </nav>
-            <Link href="/quote" className={`${primaryButton} !gap-3 !px-4 !py-2.5 lg:!gap-6 lg:!px-5`}>
+            <Link href="/quote" className={`${limeButton} !gap-3 !px-4 !py-2.5 lg:!gap-6 lg:!px-5`}>
               Request a quote
               <Arrow />
             </Link>
