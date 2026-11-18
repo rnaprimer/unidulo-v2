@@ -3,6 +3,7 @@
 // closing band. No logic and no data loading. Every sentence here restates
 // something the rest of the site already says.
 import Link from "next/link";
+import { IntroVideoPlayer } from "./intro-video-player";
 import { TrackingPreview } from "./tracking-preview";
 import { Arrow, Icon, Label, limeButton, Plus, SectionHead, summaryRow } from "./ui";
 
@@ -225,9 +226,8 @@ export function Process() {
 
 /* ---------- The intro video, beside the three steps ---------- */
 
-// A plain video with the browser's own controls: no autoplay, no JavaScript of
-// ours. The file has no sound. width and height let the browser hold the right
-// space before the video loads, so the page doesn't jump.
+// The video has no sound and never plays by itself. Its play button lives in
+// intro-video-player.tsx, the only browser-side code on the home page.
 export function IntroVideo() {
   return (
     <section className="mx-auto max-w-6xl px-5 pt-16 md:pt-24">
@@ -235,17 +235,7 @@ export function IntroVideo() {
 
       <div className="mt-12 grid items-start gap-x-10 gap-y-10 md:grid-cols-[3fr_2fr]">
         <figure>
-          <video
-            controls
-            playsInline
-            preload="metadata"
-            poster="/video/unidulo-intro-poster.jpg"
-            width={1920}
-            height={1080}
-            className="aspect-video h-auto w-full rounded-[3px] border border-hair bg-charcoal"
-          >
-            <source src="/video/unidulo-intro.mp4" type="video/mp4" />
-          </video>
+          <IntroVideoPlayer src="/video/unidulo-intro.mp4" poster="/video/unidulo-intro-poster.jpg" />
           <figcaption className="mt-3 text-sm text-soft">
             A 37-second look at how Unidulo works. The order shown is an illustration.
           </figcaption>
