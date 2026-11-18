@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Capabilities } from "@/components/capabilities";
-import { ClosingBand, PackagingSwitcher, Process, Promises, Questions } from "@/components/home-sections";
+import {
+  ClosingBand,
+  IntroVideo,
+  PackagingSwitcher,
+  Process,
+  Promises,
+  Questions,
+} from "@/components/home-sections";
 import { Arrow, Label, primaryButton, textLink } from "@/components/ui";
 
 export default function Home() {
@@ -63,6 +70,7 @@ export default function Home() {
       </section>
 
       <Promises />
+      <IntroVideo />
       <Capabilities />
       <PackagingSwitcher />
       <Process />

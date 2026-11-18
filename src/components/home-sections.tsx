@@ -165,6 +165,7 @@ export function PackagingSwitcher() {
 /* ---------- 03: the process, with the tracking illustration ---------- */
 
 // Three steps that shorten the seven on the How it works page.
+// Used twice on the home page: beside the intro video and in the process section.
 const steps = [
   {
     title: "Tell us what you need",
@@ -216,6 +217,61 @@ export function Process() {
           </div>
 
           <TrackingPreview />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- The intro video, beside the three steps ---------- */
+
+// A plain video with the browser's own controls: no autoplay, no JavaScript of
+// ours. The file has no sound. width and height let the browser hold the right
+// space before the video loads, so the page doesn't jump.
+export function IntroVideo() {
+  return (
+    <section className="mx-auto max-w-6xl px-5 pt-16 md:pt-24">
+      <SectionHead label="See how it works" title={["Custom packaging,", "without the chasing."]} />
+
+      <div className="mt-12 grid items-start gap-x-10 gap-y-10 md:grid-cols-[3fr_2fr]">
+        <figure>
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            poster="/video/unidulo-intro-poster.jpg"
+            width={1920}
+            height={1080}
+            className="aspect-video h-auto w-full rounded-[3px] border border-hair bg-charcoal"
+          >
+            <source src="/video/unidulo-intro.mp4" type="video/mp4" />
+          </video>
+          <figcaption className="mt-3 text-sm text-soft">
+            A 37-second look at how Unidulo works. The order shown is an illustration.
+          </figcaption>
+        </figure>
+
+        <div>
+          <ol className="border-t border-hair">
+            {steps.map((step, i) => (
+              <li key={step.title} className="flex gap-4 border-b border-hair py-6">
+                <span className="w-5 shrink-0 pt-0.5 text-[11px] text-soft tabular-nums" aria-hidden="true">
+                  0{i + 1}
+                </span>
+                <div>
+                  <h3 className="font-medium">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-soft">{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <Link
+            href="/how-it-works"
+            className="mt-6 inline-flex items-center gap-2.5 text-sm font-medium underline-offset-4 hover:underline"
+          >
+            See every step
+            <Arrow />
+          </Link>
         </div>
       </div>
     </section>
