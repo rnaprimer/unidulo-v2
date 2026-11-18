@@ -234,12 +234,7 @@ export function IntroVideo() {
       <SectionHead label="See how it works" title={["Custom packaging,", "without the chasing."]} />
 
       <div className="mt-12 grid items-start gap-x-10 gap-y-10 md:grid-cols-[3fr_2fr]">
-        <figure>
-          <IntroVideoPlayer src="/video/unidulo-intro.mp4" poster="/video/unidulo-intro-poster.jpg" />
-          <figcaption className="mt-3 text-sm text-soft">
-            A 37-second look at how Unidulo works. The order shown is an illustration.
-          </figcaption>
-        </figure>
+        <IntroVideoPlayer src="/video/unidulo-intro.mp4" poster="/video/unidulo-intro-poster.jpg" />
 
         <div>
           <ol className="border-t border-hair">
